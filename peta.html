@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Peta Kota Depok</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+
+    <style>
+      #map {
+        height: 400px;
+      }
+    </style>
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map = L.map("map").setView([-6.402905, 106.778419], 15);
+
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(map);
+
+      var a = {
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            properties: {
+              kampus: "STT Terpadu Nurul Fikri - Kampus B",
+              kota: "Kota Jakarta Selatan",
+            },
+            geometry: {
+              coordinates: [106.83268668213373, -6.352873403435865],
+              type: "Point",
+            },
+          },
+          {
+            type: "Feature",
+            properties: {
+              kampus: "STT Terpadu Nurul Fikri - Kampus A",
+              kota: "Kota Depok",
+            },
+            geometry: {
+              coordinates: [106.84452832337291, -6.362590800775337],
+              type: "Point",
+            },
+          },
+          {
+            type: "Feature",
+            properties: {
+              kampus: "Universitas Indonesia",
+              kota: "Kota Depok",
+            },
+            geometry: {
+              coordinates: [106.82947203688224, -6.363486717038967],
+              type: "Point",
+            },
+          },
+          {
+            type: "Feature",
+            properties: {
+              kampus: "Universitas Pancasila",
+              kota: "Kota Jakarta Selatan",
+            },
+            geometry: {
+              coordinates: [106.83281400000027, -6.339242994852853],
+              type: "Point",
+            },
+          },
+          {
+            type: "Feature",
+            properties: {
+              kampus: "Universitas Gunadarma",
+              kota: "Kota Depok",
+            },
+            geometry: {
+              coordinates: [106.8415100955591, -6.353967431755251],
+              type: "Point",
+            },
+          },
+          {
+            type: "Feature",
+            properties: {
+              kampus: "Kampus Polimedia",
+              kota: "Kota Jakarta Selatan",
+            },
+            geometry: {
+              coordinates: [106.8272772337665, -6.347005664151084],
+              type: "Point",
+            },
+          },
+        ],
+      };
+
+      var geojson = L.geoJSON(aoi, {
+        onEachFeature: function (feature, layer) {
+          layer.bindPopup(
+            feature.properties.kampus + "<br/>" + feature.properties.kota
+          );
+        },
+      }).addTo(map);
+    </script>
+  </body>
+</html>
